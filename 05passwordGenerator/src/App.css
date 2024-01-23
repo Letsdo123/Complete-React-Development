@@ -1,0 +1,27 @@
+/* password generator :: start */
+.password-generator{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.main-password-container{
+  min-width: 40rem;
+  background-color: #1e2532;
+  border-radius: 10px;
+}
+.password-generator label{
+  color: orange;
+  white-space: nowrap;
+}
+.input-group-text.custom-copy-btn{
+  background-color: #1e45ce;
+  border: 0;
+  color: white;
+}
+.password-container input{
+  color: orange;
+}
+/* password generator :: end */
