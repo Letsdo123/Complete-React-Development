@@ -20,6 +20,10 @@
   background-color: #1e45ce;
   border: 0;
   color: white;
+  cursor: pointer;
+}
+.input-group-text.custom-copy-btn:hover{
+  background-color: orange;
 }
 .password-container input{
   color: orange;
