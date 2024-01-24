@@ -41,7 +41,7 @@ const router = createBrowserRouter(
       <Route loader={githubDetails} path='github' element={<Github/>}/>
     </Route>
   )
-)
+);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
