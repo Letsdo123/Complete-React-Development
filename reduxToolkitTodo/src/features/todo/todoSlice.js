@@ -53,11 +53,19 @@ export const todoSlice = createSlice({
     },
     updateTodo: (state, action) => {
       console.log("update todo called");
-      const updateItemId = action.payload;
-      const updatedMsg = action.payload;
+
+      //   const updateItemId = action.payload;
+      //   const updatedMsg = action.payload;
+      const { updatedItemId, updatedMsg } = action.payload;
       state.todos = state.todos.map((todo) => {
-        if (todo.id === updateItemId) {
-          todo.text = updatedMsg;
+        if (todo.id === updatedItemId) {
+          return {
+            ...todo,
+            text: updatedMsg,
+            isEditable: false,
+          };
+        } else {
+          return todo;
         }
       });
     },

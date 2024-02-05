@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../features/todo/todoSlice";
+import { addTodo, updateTodo } from "../features/todo/todoSlice";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -10,18 +10,40 @@ function TodoInput() {
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos);
   const [msg, setMsg] = useState();
+  const [updatedetails, setUpdateDetails] = useState({
+    optToUpdate: false,
+    updateItemId: undefined,
+  });
   useEffect(() => {
     console.log("Some chnage has occured in todos");
     todos.map((todo) => {
       if (todo.isEditable) {
         console.log(todo.text);
         setMsg(todo.text);
+        setUpdateDetails({
+          optToUpdate: true,
+          updateItemId: todo.id,
+        });
       }
     });
   }, [todos]);
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    dispatch(addTodo(msg));
+    if (!updatedetails.optToUpdate) {
+      dispatch(addTodo(msg));
+    } else {
+      console.log(msg);
+      dispatch(
+        updateTodo({
+          updatedItemId: updatedetails.updateItemId,
+          updatedMsg: msg,
+        })
+      );
+      setUpdateDetails({
+        optToUpdate: undefined,
+        optToUpdate: false,
+      });
+    }
     setMsg("");
   };
   return (
