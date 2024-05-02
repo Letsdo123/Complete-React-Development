@@ -15,7 +15,7 @@ export class Service {
     }
     // method to create the post
     // slug->document's id
-    async createPost({title,slug,content,featureddImage,status,userId}){
+    async createPost({title,slug,content,featuredimage,status,userId}){
         try {
             const post=await this.databases.createDocument(
                 config.appwriteDatabaseId,
@@ -24,7 +24,7 @@ export class Service {
                 {
                     title,
                     content,
-                    featureddImage,
+                    featuredimage,
                     status,
                     userId
                 },
@@ -70,21 +70,18 @@ export class Service {
     // get one post
     async getPost(slug){
         try {
-            await this.databases.getDocument(
+            return await this.databases.getDocument(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
                 slug,
             )
-            return true;
         } catch (error) {
             console.log("Appwrite create service :: createpost",error);
             return false;
         }
     }
     // get posts using quires
-    async getPosts(queries=[
-        Query.equal("status","active")
-    ])
+    async getPosts(queries=[Query.equal("status","active")])
     {
         try {
             return await this.databases.listDocuments(

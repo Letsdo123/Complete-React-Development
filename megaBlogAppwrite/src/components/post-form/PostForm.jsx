@@ -15,17 +15,17 @@ function PostForm({ post }) {
     }
   })
   const navigate = useNavigate()
-  const userData = useSelector((state) => state.userData)
+  const userData = useSelector((state) => state.userData.userData)
 
   const submit = async (data) => {
     if (post) {
       const file = data.image[0] ? service.uploadFile(data.image[0]) : null
       if (file) {
-        service.deleteFile(post.featuredImage)
+        service.deleteFile(post.featuredimage)
       }
       const dbPost = await service.updatePost(post.$id, {
         ...data,
-        featureddImage: file ? file.$id : undefined
+        featuredimage: file ? file.$id : undefined
       }
       )
       if (dbPost) {
@@ -36,7 +36,7 @@ function PostForm({ post }) {
       const file = await service.uploadFile(data.image[0])
       if (file) {
         const fileId = file.$id
-        data.featuredImage = fileId
+        data.featuredimage = fileId
         const dbPost = await service.createPost({
           ...data,
           userId: userData.$id
@@ -98,7 +98,7 @@ function PostForm({ post }) {
         {post && (
           <div>
             <img
-              src={service.getFilePreview(post.featuredImage)}
+              src={service.getFilePreview(post.featuredimage)}
               alt={post.title}
               className='rounded-lg'
             />

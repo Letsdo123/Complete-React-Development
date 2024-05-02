@@ -1,5 +1,6 @@
 import { Client, Account, ID } from "appwrite";
 import config from "../config/config";
+import {toast} from 'react-toastify'
 
 export class AuthService {
     // properties
@@ -15,24 +16,25 @@ export class AuthService {
     // Methods
 
     // 1.For Signup
-    async createUser({ email, paswword, name }) {
+    async createUser({ email, password, name }) {
         try {
             const response = await this.account.create(
                 ID.unique(),
                 email,
-                paswword,
+                password,
                 name
             )
             if (response) {
                 // do login
                 // by calling another method
-                return this.Login({email,paswword});
+                return this.Login({email,password});
             }
             else {
                 return response;
             }
         } catch (error) {
             console.log(error);
+            toast.error(error);
         }
     }
     // 2.Login
@@ -42,6 +44,7 @@ export class AuthService {
             return response;
         } catch (error) {
             console.log(error);
+            toast.error(error);
         }
         return null;
     }
